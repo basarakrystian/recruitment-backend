@@ -1,45 +1,86 @@
-# Zadanie rekrutacyjne
 
-**Cel:**
-Stworzenie prostego systemu do zarządzania książkami w bibliotece.
+# Requirements
+- PHP 8.1
+- Composer 2
 
-## Specyfikacja:
-1. **Aplikacja:**
-    - Użyj Laravela jako frameworka oraz MySQL jako bazy danych.
-2. **Interfejs użytkownika:**
-    - Prosty interfejs, który pozwoli użytkownikowi na dodawanie, edycję, usuwanie oraz przeglądanie książek.
-3. **Model książki:**
-	Książka powinna zawierać następujące informacje:
-	- Tytuł
-	- Autor
-	- Rok wydania
-	- Krótki opis
-	- Ilość dostępnych egzemplarzy
-4. **Walidacja:**
-	- Upewnij się, że wszystkie pola są odpowiednio walidowane przed zapisaniem do bazy danych.
-5. **Wyszukiwanie:**
-	- Użytkownik powinien być w stanie wyszukać książkę po tytule lub autorze.
-6. **Paginacja:**
-    - Jeśli w bazie jest więcej niż 10 książek, użyj paginacji do wyświetlania wyników.
-7. **Relacje:**
-    - Dodaj funkcjonalność, która pozwoli na przypisanie książki do kategorii (np. literatura, historia, nauka). Użytkownik powinien być w stanie przeglądać książki według kategorii.
+# SETUP
+- Clone repo: https://github.com/basarakrystian/recruitment-backend
+- Open terminal and cd into project directory
+```bash
+composer install
+cp .env.example .env
+```
+- Update .env file with database credentials
+```bash
+php artisan key:generate
+php artisan config:cache
+php artisan migrate
+php artisan db:seed
+php artisan serve
+```
+- You're ready to visit library at: http://127.0.0.1:8000
 
-## Dodatkowe punkty za:
-1. Użycie migracji i seederów w Laravelu do stworzenia przykładowych danych.
-2. Stworzenie API do zarządzania książkami.
-3. Użycie autoryzacji i autentykacji w aplikacji, tak aby tylko zalogowani użytkownicy mogli zarządzać książkami.
-4. Responsywność interfejsu użytkownika.
+# API Examples
 
-## Instrukcje:
-1. Utwórz fork repozytorium udostępnionego przez nas na GitHub [pod tym linkiem](https://github.com/Dentametr/recruitment-backend).
-2. Po zakończeniu zadania, wyślij link do Twojego forka na adres: info@avalio.io.
-3. Upewnij się, że zawarłeś/aś wszystkie niezbędne instrukcje w README, abyśmy mogli uruchomić Twoją aplikację lokalnie (możesz nadpisać ten plik).
 
-## Ocenianie:
-Przy ocenie będziemy zwracać uwagę na:
-- Jakość kodu.
-- Przestrzeganie standardów i najlepszych praktyk programowania w PHP i Laravelu.
-- Funkcjonalność i spełnienie wymagań.
-- Zrozumienie relacji i struktury bazy danych.
+1. **Index (GET Request):**
+   - Retrieve a list of books with optional query parameters.
 
-**Powodzenia!** 
+```bash
+curl -X GET "http://127.0.0.1:8000/books?category=1&search=Harry Potter" \ 
+     -H "Authorization: Bearer your_access_token" \
+     -H "X-Requested-With: XMLHttpRequest"
+```
+
+2. **Store (POST Request):**
+   - Create a new book.
+
+```bash
+curl -X POST "http://127.0.0.1:8000/books" -H "Authorization: Bearer your_access_token" \
+     -H "X-Requested-With: XMLHttpRequest"\
+     -d "title=New Book" \
+     -d "author=John Doe" \
+     -d "description=This is a new book" \
+     -d "year=2023" \
+     -d "quantity=10" \
+     -d "category_id=1"
+```
+
+3. **Show (GET Request):**
+   - Retrieve details of a specific book by its ID.
+
+```bash
+curl -X GET "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_access_token" \
+     -H "X-Requested-With: XMLHttpRequest"
+```
+
+4. **Update (PUT Request):**
+   - Update an existing book by its ID.
+
+```bash
+curl -X PUT "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_access_token" \
+     -H "X-Requested-With: XMLHttpRequest"\
+     -d "title=Updated Book" \
+     -d "author=Jane Doe" \
+     -d "description=This is an updated book" \
+     -d "year=2024" \
+     -d "quantity=5" \
+     -d "category_id=2"
+```
+
+5. **Destroy (DELETE Request):**
+   - Delete a specific book by its ID.
+
+```bash
+curl -X DELETE "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_access_token" \
+     -H "X-Requested-With: XMLHttpRequest"
+```
+
+
+6. **Index (GET Request):**
+    - Retrieve a list of categories.
+
+```bash
+curl -X GET "http://127.0.0.1:8000/categories" -H "Authorization: Bearer your_access_token" \
+     -H "X-Requested-With: XMLHttpRequest"
+```
