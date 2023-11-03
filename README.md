@@ -27,7 +27,7 @@ php artisan serve
    - Retrieve a list of books with optional query parameters.
 
 ```bash
-curl -X GET "http://127.0.0.1:8000/books?category=1&search=Harry Potter" \ 
+curl -X GET "http://127.0.0.1:8000/api/books?category=1&search=Harry Potter" \ 
      -H "Authorization: Bearer your_access_token" \
      -H "X-Requested-With: XMLHttpRequest"
 ```
@@ -36,7 +36,7 @@ curl -X GET "http://127.0.0.1:8000/books?category=1&search=Harry Potter" \
    - Create a new book.
 
 ```bash
-curl -X POST "http://127.0.0.1:8000/books" -H "Authorization: Bearer your_access_token" \
+curl -X POST "http://127.0.0.1:8000/api/books" -H "Authorization: Bearer your_access_token" \
      -H "X-Requested-With: XMLHttpRequest"\
      -d "title=New Book" \
      -d "author=John Doe" \
@@ -50,7 +50,7 @@ curl -X POST "http://127.0.0.1:8000/books" -H "Authorization: Bearer your_access
    - Retrieve details of a specific book by its ID.
 
 ```bash
-curl -X GET "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_access_token" \
+curl -X GET "http://127.0.0.1:8000/api/books/1" -H "Authorization: Bearer your_access_token" \
      -H "X-Requested-With: XMLHttpRequest"
 ```
 
@@ -58,7 +58,7 @@ curl -X GET "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_acces
    - Update an existing book by its ID.
 
 ```bash
-curl -X PUT "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_access_token" \
+curl -X PUT "http://127.0.0.1:8000/api/books/1" -H "Authorization: Bearer your_access_token" \
      -H "X-Requested-With: XMLHttpRequest"\
      -d "title=Updated Book" \
      -d "author=Jane Doe" \
@@ -72,7 +72,7 @@ curl -X PUT "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_acces
    - Delete a specific book by its ID.
 
 ```bash
-curl -X DELETE "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_access_token" \
+curl -X DELETE "http://127.0.0.1:8000/api/books/1" -H "Authorization: Bearer your_access_token" \
      -H "X-Requested-With: XMLHttpRequest"
 ```
 
@@ -81,6 +81,6 @@ curl -X DELETE "http://127.0.0.1:8000/books/1" -H "Authorization: Bearer your_ac
     - Retrieve a list of categories.
 
 ```bash
-curl -X GET "http://127.0.0.1:8000/categories" -H "Authorization: Bearer your_access_token" \
+curl -X GET "http://127.0.0.1:8000/api/categories" -H "Authorization: Bearer your_access_token" \
      -H "X-Requested-With: XMLHttpRequest"
 ```
